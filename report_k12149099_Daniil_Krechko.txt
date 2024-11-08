@@ -1,0 +1,23 @@
+MRS Challenge Report
+Daniil Krechko k12149099
+
+1. Experimental Setup
+
+My starting point in working on this project was focused on importing all the needed libraries (pandas, numpy, tdqm and others), and then I copied the different methods and Recommenders from the previous Assignments that we had throughout the semester. Among them were: get_ndcg_score to get nDCG scores of various Recommenders, inter_matr_implicit to get interaction matrix, top POP Recommender, Collaborative Filtering Recommenders (item-based ItemKNN and Model-based SVD), and other useful functions we implemented in previous Assignments.
+
+2. Approach
+Then, I loaded all the data provided for the challenge, preprocessed it, and created an interaction matrix. Then, I ran the top POP Recommender with k=10 recommendations, SVD, and ItemKNN. After evaluation, the top POP Recommender could be already beaten by both SVD and ItemKNN algorithms (according to the nDCG score). Meanwhile, the score difference between SVD and ItemKNN was not too big. That’s why I tuned both SVD and ItemKNN iterating over different hyperparameters (number of factors for SVD and number of neighbors for ItemKNN) to check if SVD can get ahead of ItemKNN. The best hyperparameters I found for SVD and ItemKNN are num_factors = 300 (SVD), default = 50, and num_neighbors = 5 (ItemKNN), default = 5 (the same). 
+
+3. Performance (num_recommendations = 10)
+Baselines:
+Top POP  Recommender = 0.008281794753377494
+SVD (num_factors = 50) = 0.1228218437052105
+ItemKNN (num_neighbors = 5) = 0.1874178617787261
+
+Tuned Hyperparameters: Top POP  Recommender = 0.008281794753377494
+SVD (num_factors = 300) = 0.168901641627851
+ItemKNN (num_neighbors = 5) = 0.1874178617787261
+
+4. Final Performance
+Comparing the performance of tuned Recommender systems, ItemKNN ended up having the highest performance out of all algorithms. Finally, I wrote a simple script and saved all the predictions from ItemKNN (num_neighbours = 5) to tsv file. 
+
